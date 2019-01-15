@@ -1,17 +1,24 @@
-import { L, Record, declare, Union } from "../../fable-core/Types.js";
-import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Size$$$ofSize as Size$0024$0024$0024ofSize, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers, Color$$$ofColor as Color$0024$0024$0024ofColor } from "../Fulma/Common.js";
-import { append as append$$1, ofSeq, fold } from "../../fable-core/List.js";
-import { append, delay, empty, singleton } from "../../fable-core/Seq.js";
+import { List, Record, declare, Union } from "../fable-library.2.1.8/Types.js";
+import { record, option as option$$1, list as list$$1, lambda, unit, type, bool, string, union } from "../fable-library.2.1.8/Reflection.js";
+import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Size$$$ofSize as Size$0024$0024$0024ofSize, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers, Color$$$ofColor as Color$0024$0024$0024ofColor, Modifier$002EIModifier$reflection as Modifier$0024002EIModifier$0024reflection, Color$002EIColor$reflection as Color$0024002EIColor$0024reflection, Size$002EISize$reflection as Size$0024002EISize$0024reflection } from "../Fulma/Common.js";
+import { append as append$$1, ofSeq, ofArray, fold } from "../fable-library.2.1.8/List.js";
+import { append, delay, empty, singleton } from "../fable-library.2.1.8/Seq.js";
 import { Props$002EDOMAttr as Props$0024002EDOMAttr, Props$002EProp as Props$0024002EProp, Props$002EHTMLAttr as Props$0024002EHTMLAttr } from "../Fable.React/Fable.Helpers.React.js";
-import { createObj, equals } from "../../fable-core/Util.js";
+import { createObj, equals } from "../fable-library.2.1.8/Util.js";
 const createElement = React.createElement;
-export const IInputType = declare(function IInputType(tag, name, ...fields) {
+export const IInputType = declare(function Fulma_Input_IInputType(tag, name, ...fields) {
   Union.call(this, tag, name, ...fields);
 }, Union);
-export const Option = declare(function Option(tag, name, ...fields) {
+export function IInputType$reflection() {
+  return union("Fulma.Input.IInputType", [], IInputType, () => ["Text", "Password", "DatetimeLocal", "Date", "Month", "Time", "Week", "Number", "Email", "Url", "Search", "Tel", "ColorType"]);
+}
+export const Option = declare(function Fulma_Input_Option(tag, name, ...fields) {
   Union.call(this, tag, name, ...fields);
 }, Union);
-export const Options = declare(function Options(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17) {
+export function Option$reflection() {
+  return union("Fulma.Input.Option", [], Option, () => [["Size", [Size$0024002EISize$0024reflection()]], ["Type", [IInputType$reflection()]], ["Color", [Color$0024002EIColor$0024reflection()]], ["Id", [string]], ["Disabled", [bool]], ["IsReadOnly", [bool]], ["IsStatic", [bool]], "IsRounded", ["Value", [string]], ["DefaultValue", [string]], ["ValueOrDefault", [string]], ["Placeholder", [string]], ["OnChange", [lambda(type("Fable.Import.React.FormEvent"), unit)]], ["Ref", [lambda(type("Fable.Import.Browser.Element"), unit)]], ["Props", [list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))]], ["CustomClass", [string]], ["Modifiers", [list$$1(Modifier$0024002EIModifier$0024reflection())]]]);
+}
+export const Options = declare(function Fulma_Input_Options(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17) {
   this.Size = arg1;
   this.Type = arg2;
   this.Color = arg3;
@@ -30,8 +37,11 @@ export const Options = declare(function Options(arg1, arg2, arg3, arg4, arg5, ar
   this.CustomClass = arg16;
   this.Modifiers = arg17;
 }, Record);
+export function Options$reflection() {
+  return record("Fulma.Input.Options", [], Options, () => [["Size", option$$1(string)], ["Type", string], ["Color", option$$1(string)], ["Id", option$$1(string)], ["Disabled", bool], ["IsReadOnly", bool], ["IsStatic", bool], ["IsRounded", bool], ["Value", option$$1(string)], ["DefaultValue", option$$1(string)], ["ValueOrDefault", option$$1(string)], ["Placeholder", option$$1(string)], ["OnChange", option$$1(lambda(type("Fable.Import.React.FormEvent"), unit))], ["Ref", option$$1(lambda(type("Fable.Import.Browser.Element"), unit))], ["Props", list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))], ["CustomClass", option$$1(string)], ["Modifiers", list$$1(option$$1(string))]]);
+}
 export function Options$$$get_Empty() {
-  return new Options(null, "", null, null, false, false, false, false, null, null, null, null, null, null, L(), null, L());
+  return new Options(null, "", null, null, false, false, false, false, null, null, null, null, null, null, new List(), null, new List());
 }
 
 function ofType(_arg1) {
@@ -210,7 +220,7 @@ export function input(options) {
   };
 
   const opts = fold(parseOptions, Options$$$get_Empty(), options);
-  const classes = Common$0024002EHelpers$0024$0024$0024classes("input", L(opts.Size, L(opts.Color, L(opts.CustomClass, opts.Modifiers))), L(["is-static", opts.IsStatic], L(["is-rounded", opts.IsRounded], L())));
+  const classes = Common$0024002EHelpers$0024$0024$0024classes("input", new List(opts.Size, new List(opts.Color, new List(opts.CustomClass, opts.Modifiers))), ofArray([["is-static", opts.IsStatic], ["is-rounded", opts.IsRounded]]));
   return createElement("input", createObj(append$$1(ofSeq(delay(function () {
     return append(singleton(classes), delay(function () {
       return append(singleton(new Props$0024002EHTMLAttr(37, "Disabled", opts.Disabled)), delay(function () {
@@ -237,44 +247,44 @@ export function input(options) {
         }));
       }));
     }));
-  })), opts.Props), 1), ...L());
+  })), opts.Props), 1), ...new List());
 }
 export function text(options$$2) {
-  return input(L(new Option(1, "Type", new IInputType(0, "Text")), options$$2));
+  return input(new List(new Option(1, "Type", new IInputType(0, "Text")), options$$2));
 }
 export function password(options$$3) {
-  return input(L(new Option(1, "Type", new IInputType(1, "Password")), options$$3));
+  return input(new List(new Option(1, "Type", new IInputType(1, "Password")), options$$3));
 }
 export function datetimeLocal(options$$4) {
-  return input(L(new Option(1, "Type", new IInputType(2, "DatetimeLocal")), options$$4));
+  return input(new List(new Option(1, "Type", new IInputType(2, "DatetimeLocal")), options$$4));
 }
 export function date(options$$5) {
-  return input(L(new Option(1, "Type", new IInputType(3, "Date")), options$$5));
+  return input(new List(new Option(1, "Type", new IInputType(3, "Date")), options$$5));
 }
 export function month(options$$6) {
-  return input(L(new Option(1, "Type", new IInputType(4, "Month")), options$$6));
+  return input(new List(new Option(1, "Type", new IInputType(4, "Month")), options$$6));
 }
 export function time(options$$7) {
-  return input(L(new Option(1, "Type", new IInputType(5, "Time")), options$$7));
+  return input(new List(new Option(1, "Type", new IInputType(5, "Time")), options$$7));
 }
 export function week(options$$8) {
-  return input(L(new Option(1, "Type", new IInputType(6, "Week")), options$$8));
+  return input(new List(new Option(1, "Type", new IInputType(6, "Week")), options$$8));
 }
 export function number(options$$9) {
-  return input(L(new Option(1, "Type", new IInputType(7, "Number")), options$$9));
+  return input(new List(new Option(1, "Type", new IInputType(7, "Number")), options$$9));
 }
 export function email(options$$10) {
-  return input(L(new Option(1, "Type", new IInputType(8, "Email")), options$$10));
+  return input(new List(new Option(1, "Type", new IInputType(8, "Email")), options$$10));
 }
 export function url(options$$11) {
-  return input(L(new Option(1, "Type", new IInputType(9, "Url")), options$$11));
+  return input(new List(new Option(1, "Type", new IInputType(9, "Url")), options$$11));
 }
 export function search(options$$12) {
-  return input(L(new Option(1, "Type", new IInputType(10, "Search")), options$$12));
+  return input(new List(new Option(1, "Type", new IInputType(10, "Search")), options$$12));
 }
 export function tel(options$$13) {
-  return input(L(new Option(1, "Type", new IInputType(11, "Tel")), options$$13));
+  return input(new List(new Option(1, "Type", new IInputType(11, "Tel")), options$$13));
 }
 export function color(options$$14) {
-  return input(L(new Option(1, "Type", new IInputType(12, "ColorType")), options$$14));
+  return input(new List(new Option(1, "Type", new IInputType(12, "ColorType")), options$$14));
 }

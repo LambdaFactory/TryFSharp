@@ -1,12 +1,16 @@
-import { L, Record, declare, Union } from "../../fable-core/Types.js";
-import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers } from "../Fulma/Common.js";
-import { fold } from "../../fable-core/List.js";
-import { createObj } from "../../fable-core/Util.js";
+import { List, Record, declare, Union } from "../fable-library.2.1.8/Types.js";
+import { record, option, union, list as list$$1, type, string } from "../fable-library.2.1.8/Reflection.js";
+import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers, Modifier$002EIModifier$reflection as Modifier$0024002EIModifier$0024reflection } from "../Fulma/Common.js";
+import { fold } from "../fable-library.2.1.8/List.js";
+import { createObj } from "../fable-library.2.1.8/Util.js";
 const createElement = React.createElement;
-export const Option = declare(function Option(tag, name, ...fields) {
+export const Option = declare(function Fulma_Columns_Option(tag, name, ...fields) {
   Union.call(this, tag, name, ...fields);
 }, Union);
-export const Options = declare(function Options(arg1, arg2, arg3, arg4, arg5, arg6) {
+export function Option$reflection() {
+  return union("Fulma.Columns.Option", [], Option, () => ["IsCentered", "IsVCentered", "IsMultiline", "IsGapless", "IsGrid", "IsMobile", "IsDesktop", ["CustomClass", [string]], ["Props", [list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))]], ["Modifiers", [list$$1(Modifier$0024002EIModifier$0024reflection())]]]);
+}
+export const Options = declare(function Fulma_Columns_Options(arg1, arg2, arg3, arg4, arg5, arg6) {
   this.Display = arg1;
   this.Spacing = arg2;
   this.Alignment = arg3;
@@ -14,8 +18,11 @@ export const Options = declare(function Options(arg1, arg2, arg3, arg4, arg5, ar
   this.Props = arg5;
   this.Modifiers = arg6;
 }, Record);
+export function Options$reflection() {
+  return record("Fulma.Columns.Options", [], Options, () => [["Display", option(string)], ["Spacing", option(string)], ["Alignment", option(string)], ["CustomClass", option(string)], ["Props", list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))], ["Modifiers", list$$1(option(string))]]);
+}
 export function Options$$$get_Empty() {
-  return new Options(null, null, null, null, L(), L());
+  return new Options(null, null, null, null, new List(), new List());
 }
 export function columns(options, children) {
   const parseOptions = function parseOptions(result, _arg1) {
@@ -76,6 +83,6 @@ export function columns(options, children) {
   };
 
   const opts = fold(parseOptions, Options$$$get_Empty(), options);
-  const classes = Common$0024002EHelpers$0024$0024$0024classes("columns", L(opts.Alignment, L(opts.Display, L(opts.Spacing, L(opts.CustomClass, opts.Modifiers)))), L());
-  return createElement("div", createObj(L(classes, opts.Props), 1), ...children);
+  const classes = Common$0024002EHelpers$0024$0024$0024classes("columns", new List(opts.Alignment, new List(opts.Display, new List(opts.Spacing, new List(opts.CustomClass, opts.Modifiers)))), new List());
+  return createElement("div", createObj(new List(classes, opts.Props), 1), ...children);
 }

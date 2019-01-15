@@ -1,31 +1,44 @@
-import { L, Record, declare, Union } from "../../fable-core/Types.js";
-import { Common$$$genericParse as Common$0024$0024$0024genericParse, Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers } from "../Fulma/Common.js";
-import { fold } from "../../fable-core/List.js";
-import { createObj } from "../../fable-core/Util.js";
+import { List, Record, declare, Union } from "../fable-library.2.1.8/Types.js";
+import { record, option, union, string, bool, list as list$$3, type } from "../fable-library.2.1.8/Reflection.js";
+import { Common$$$genericParse as Common$0024$0024$0024genericParse, Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers, Modifier$002EIModifier$reflection as Modifier$0024002EIModifier$0024reflection } from "../Fulma/Common.js";
+import { fold } from "../fable-library.2.1.8/List.js";
+import { createObj } from "../fable-library.2.1.8/Util.js";
 const createElement = React.createElement;
-export const Block$002EOption = declare(function Block$002EOption(tag, name, ...fields) {
+export const Block$002EOption = declare(function Fulma_Panel_Block_Option(tag, name, ...fields) {
   Union.call(this, tag, name, ...fields);
 }, Union);
-export const Block$002EOptions = declare(function Block$002EOptions(arg1, arg2, arg3, arg4) {
-  this.Props = arg1;
-  this.CustomClass = arg2;
-  this.IsActive = arg3;
-  this.Modifiers = arg4;
-}, Record);
-export function Block$002EOptions$$$get_Empty() {
-  return new Block$002EOptions(L(), null, false, L());
+export function Block$002EOption$reflection() {
+  return union("Fulma.Panel.Block.Option", [], Block$002EOption, () => [["Props", [list$$3(type("Fable.Helpers.React.Props.IHTMLProp"))]], ["IsActive", [bool]], ["CustomClass", [string]], ["Modifiers", [list$$3(Modifier$0024002EIModifier$0024reflection())]]]);
 }
-export const Tab$002EOption = declare(function Tab$002EOption(tag, name, ...fields) {
-  Union.call(this, tag, name, ...fields);
-}, Union);
-export const Tab$002EOptions = declare(function Tab$002EOptions(arg1, arg2, arg3, arg4) {
+export const Block$002EOptions = declare(function Fulma_Panel_Block_Options(arg1, arg2, arg3, arg4) {
   this.Props = arg1;
   this.CustomClass = arg2;
   this.IsActive = arg3;
   this.Modifiers = arg4;
 }, Record);
+export function Block$002EOptions$reflection() {
+  return record("Fulma.Panel.Block.Options", [], Block$002EOptions, () => [["Props", list$$3(type("Fable.Helpers.React.Props.IHTMLProp"))], ["CustomClass", option(string)], ["IsActive", bool], ["Modifiers", list$$3(option(string))]]);
+}
+export function Block$002EOptions$$$get_Empty() {
+  return new Block$002EOptions(new List(), null, false, new List());
+}
+export const Tab$002EOption = declare(function Fulma_Panel_Tab_Option(tag, name, ...fields) {
+  Union.call(this, tag, name, ...fields);
+}, Union);
+export function Tab$002EOption$reflection() {
+  return union("Fulma.Panel.Tab.Option", [], Tab$002EOption, () => [["Props", [list$$3(type("Fable.Helpers.React.Props.IHTMLProp"))]], ["IsActive", [bool]], ["CustomClass", [string]], ["Modifiers", [list$$3(Modifier$0024002EIModifier$0024reflection())]]]);
+}
+export const Tab$002EOptions = declare(function Fulma_Panel_Tab_Options(arg1, arg2, arg3, arg4) {
+  this.Props = arg1;
+  this.CustomClass = arg2;
+  this.IsActive = arg3;
+  this.Modifiers = arg4;
+}, Record);
+export function Tab$002EOptions$reflection() {
+  return record("Fulma.Panel.Tab.Options", [], Tab$002EOptions, () => [["Props", list$$3(type("Fable.Helpers.React.Props.IHTMLProp"))], ["CustomClass", option(string)], ["IsActive", bool], ["Modifiers", list$$3(option(string))]]);
+}
 export function Tab$002EOptions$$$get_Empty() {
-  return new Tab$002EOptions(L(), null, false, L());
+  return new Tab$002EOptions(new List(), null, false, new List());
 }
 export function block(options, children) {
   const parseOptions = function parseOptions(result, opt) {
@@ -57,10 +70,10 @@ export function block(options, children) {
   };
 
   const opts = fold(parseOptions, Block$002EOptions$$$get_Empty(), options);
-  const classes = Common$0024002EHelpers$0024$0024$0024classes("panel-block", L(opts.CustomClass, opts.Modifiers), L(["is-active", opts.IsActive], L()));
-  return createElement("div", createObj(L(classes, opts.Props), 1), ...children);
+  const classes = Common$0024002EHelpers$0024$0024$0024classes("panel-block", new List(opts.CustomClass, opts.Modifiers), new List(["is-active", opts.IsActive], new List()));
+  return createElement("div", createObj(new List(classes, opts.Props), 1), ...children);
 }
-export function checkbox(options$$2, children$$2) {
+export function checkbox(options$$2, children$$3) {
   const parseOptions$$1 = function parseOptions$$1(result$$1, opt$$1) {
     switch (opt$$1.tag) {
       case 1:
@@ -83,32 +96,32 @@ export function checkbox(options$$2, children$$2) {
 
       default:
         {
-          const props$$2 = opt$$1.fields[0];
-          return new Block$002EOptions(props$$2, result$$1.CustomClass, result$$1.IsActive, result$$1.Modifiers);
+          const props$$3 = opt$$1.fields[0];
+          return new Block$002EOptions(props$$3, result$$1.CustomClass, result$$1.IsActive, result$$1.Modifiers);
         }
     }
   };
 
   const opts$$1 = fold(parseOptions$$1, Block$002EOptions$$$get_Empty(), options$$2);
-  const classes$$1 = Common$0024002EHelpers$0024$0024$0024classes("panel-block", L(opts$$1.CustomClass, opts$$1.Modifiers), L(["is-active", opts$$1.IsActive], L()));
-  return createElement("label", createObj(L(classes$$1, opts$$1.Props), 1), ...children$$2);
+  const classes$$1 = Common$0024002EHelpers$0024$0024$0024classes("panel-block", new List(opts$$1.CustomClass, opts$$1.Modifiers), new List(["is-active", opts$$1.IsActive], new List()));
+  return createElement("label", createObj(new List(classes$$1, opts$$1.Props), 1), ...children$$3);
 }
-export function panel(options$$4, children$$4) {
+export function panel(options$$4, children$$6) {
   const opts$$2 = Common$0024$0024$0024genericParse(options$$4);
-  const classes$$2 = Common$0024002EHelpers$0024$0024$0024classes("panel", L(opts$$2.CustomClass, opts$$2.Modifiers), L());
-  return createElement("nav", createObj(L(classes$$2, opts$$2.Props), 1), ...children$$4);
+  const classes$$2 = Common$0024002EHelpers$0024$0024$0024classes("panel", new List(opts$$2.CustomClass, opts$$2.Modifiers), new List());
+  return createElement("nav", createObj(new List(classes$$2, opts$$2.Props), 1), ...children$$6);
 }
-export function heading(options$$5, children$$6) {
+export function heading(options$$5, children$$9) {
   const opts$$3 = Common$0024$0024$0024genericParse(options$$5);
-  const classes$$3 = Common$0024002EHelpers$0024$0024$0024classes("panel-heading", L(opts$$3.CustomClass, opts$$3.Modifiers), L());
-  return createElement("div", createObj(L(classes$$3, opts$$3.Props), 1), ...children$$6);
+  const classes$$3 = Common$0024002EHelpers$0024$0024$0024classes("panel-heading", new List(opts$$3.CustomClass, opts$$3.Modifiers), new List());
+  return createElement("div", createObj(new List(classes$$3, opts$$3.Props), 1), ...children$$9);
 }
-export function tabs(options$$6, children$$8) {
+export function tabs(options$$6, children$$12) {
   const opts$$4 = Common$0024$0024$0024genericParse(options$$6);
-  const classes$$4 = Common$0024002EHelpers$0024$0024$0024classes("panel-tabs", L(opts$$4.CustomClass, opts$$4.Modifiers), L());
-  return createElement("div", createObj(L(classes$$4, opts$$4.Props), 1), ...children$$8);
+  const classes$$4 = Common$0024002EHelpers$0024$0024$0024classes("panel-tabs", new List(opts$$4.CustomClass, opts$$4.Modifiers), new List());
+  return createElement("div", createObj(new List(classes$$4, opts$$4.Props), 1), ...children$$12);
 }
-export function tab(options$$7, children$$10) {
+export function tab(options$$7, children$$15) {
   const parseOptions$$2 = function parseOptions$$2(result$$2, opt$$2) {
     switch (opt$$2.tag) {
       case 1:
@@ -131,18 +144,18 @@ export function tab(options$$7, children$$10) {
 
       default:
         {
-          const props$$7 = opt$$2.fields[0];
-          return new Tab$002EOptions(props$$7, result$$2.CustomClass, result$$2.IsActive, result$$2.Modifiers);
+          const props$$12 = opt$$2.fields[0];
+          return new Tab$002EOptions(props$$12, result$$2.CustomClass, result$$2.IsActive, result$$2.Modifiers);
         }
     }
   };
 
   const opts$$5 = fold(parseOptions$$2, Tab$002EOptions$$$get_Empty(), options$$7);
-  const classes$$5 = Common$0024002EHelpers$0024$0024$0024classes("", L(opts$$5.CustomClass, opts$$5.Modifiers), L(["is-active", opts$$5.IsActive], L()));
-  return createElement("a", createObj(L(classes$$5, opts$$5.Props), 1), ...children$$10);
+  const classes$$5 = Common$0024002EHelpers$0024$0024$0024classes("", new List(opts$$5.CustomClass, opts$$5.Modifiers), new List(["is-active", opts$$5.IsActive], new List()));
+  return createElement("a", createObj(new List(classes$$5, opts$$5.Props), 1), ...children$$15);
 }
-export function icon(options$$9, children$$12) {
+export function icon(options$$9, children$$18) {
   const opts$$6 = Common$0024$0024$0024genericParse(options$$9);
-  const classes$$6 = Common$0024002EHelpers$0024$0024$0024classes("panel-icon", L(opts$$6.CustomClass, opts$$6.Modifiers), L());
-  return createElement("span", createObj(L(classes$$6, opts$$6.Props), 1), ...children$$12);
+  const classes$$6 = Common$0024002EHelpers$0024$0024$0024classes("panel-icon", new List(opts$$6.CustomClass, opts$$6.Modifiers), new List());
+  return createElement("span", createObj(new List(classes$$6, opts$$6.Props), 1), ...children$$18);
 }

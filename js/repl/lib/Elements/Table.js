@@ -1,12 +1,16 @@
-import { L, Record, declare, Union } from "../../fable-core/Types.js";
-import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers } from "../Fulma/Common.js";
-import { fold } from "../../fable-core/List.js";
-import { createObj } from "../../fable-core/Util.js";
+import { List, Record, declare, Union } from "../fable-library.2.1.8/Types.js";
+import { record, option, bool, union, list as list$$1, type, string } from "../fable-library.2.1.8/Reflection.js";
+import { Common$002EHelpers$$$classes as Common$0024002EHelpers$0024$0024$0024classes, Modifier$$$parseModifiers as Modifier$0024$0024$0024parseModifiers, Modifier$002EIModifier$reflection as Modifier$0024002EIModifier$0024reflection } from "../Fulma/Common.js";
+import { ofArray, fold } from "../fable-library.2.1.8/List.js";
+import { createObj } from "../fable-library.2.1.8/Util.js";
 const createElement = React.createElement;
-export const TableOption = declare(function TableOption(tag, name, ...fields) {
+export const TableOption = declare(function Fulma_Table_TableOption(tag, name, ...fields) {
   Union.call(this, tag, name, ...fields);
 }, Union);
-const TableOptions = declare(function TableOptions(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
+export function TableOption$reflection() {
+  return union("Fulma.Table.TableOption", [], TableOption, () => ["IsBordered", "IsStriped", "IsFullWidth", "IsNarrow", "IsHoverable", ["CustomClass", [string]], ["Props", [list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))]], ["Modifiers", [list$$1(Modifier$0024002EIModifier$0024reflection())]]]);
+}
+const TableOptions = declare(function Fulma_Table_TableOptions(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
   this.IsBordered = arg1;
   this.IsStriped = arg2;
   this.IsFullwidth = arg3;
@@ -17,8 +21,12 @@ const TableOptions = declare(function TableOptions(arg1, arg2, arg3, arg4, arg5,
   this.Modifiers = arg8;
 }, Record);
 
+function TableOptions$reflection() {
+  return record("Fulma.Table.TableOptions", [], TableOptions, () => [["IsBordered", bool], ["IsStriped", bool], ["IsFullwidth", bool], ["IsNarrow", bool], ["IsHoverable", bool], ["CustomClass", option(string)], ["Props", list$$1(type("Fable.Helpers.React.Props.IHTMLProp"))], ["Modifiers", list$$1(option(string))]]);
+}
+
 function TableOptions$$$get_Empty() {
-  return new TableOptions(false, false, false, false, false, null, L(), L());
+  return new TableOptions(false, false, false, false, false, null, new List(), new List());
 }
 
 export function table(options, children) {
@@ -70,6 +78,6 @@ export function table(options, children) {
   };
 
   const opts = fold(parseOptions, TableOptions$$$get_Empty(), options);
-  const classes = Common$0024002EHelpers$0024$0024$0024classes("table", L(opts.CustomClass, opts.Modifiers), L(["is-bordered", opts.IsBordered], L(["is-striped", opts.IsStriped], L(["is-fullwidth", opts.IsFullwidth], L(["is-narrow", opts.IsNarrow], L(["is-hoverable", opts.IsHoverable], L()))))));
-  return createElement("table", createObj(L(classes, opts.Props), 1), ...children);
+  const classes = Common$0024002EHelpers$0024$0024$0024classes("table", new List(opts.CustomClass, opts.Modifiers), ofArray([["is-bordered", opts.IsBordered], ["is-striped", opts.IsStriped], ["is-fullwidth", opts.IsFullwidth], ["is-narrow", opts.IsNarrow], ["is-hoverable", opts.IsHoverable]]));
+  return createElement("table", createObj(new List(classes, opts.Props), 1), ...children);
 }
